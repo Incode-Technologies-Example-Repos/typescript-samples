@@ -195,7 +195,7 @@ type ResetPermissionsPropTypes = {
 }
 
  
-export function RetrySteps({ session, onSuccess, onError, numberOfTries }:RetryStepsPropTypes) {
+const RetrySteps = function ({ session, onSuccess, onError, numberOfTries }:RetryStepsPropTypes) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
   
@@ -223,4 +223,4 @@ type RetryStepsPropTypes = {
   numberOfTries: number;
 }
 
-export {FrontId, BackId, ProcessId, ResetPermissions, Selfie, FaceMatch, type SessionType}
+export {FrontId, BackId, ProcessId, ResetPermissions, Selfie, FaceMatch, RetrySteps, type SessionType}
