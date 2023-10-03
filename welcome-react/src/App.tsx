@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { type SessionType, FrontId, BackId, ResetPermissions, ProcessId, Selfie, FaceMatch } from "./components/OnBoarding";
+import { type SessionType, FrontId, BackId, ResetPermissions, ProcessId, Selfie, FaceMatch, RetrySteps } from "./components/OnBoarding";
 
 import usePermissions from "./hooks/usePermissions";
 import useQuery from "./hooks/useQuery";
