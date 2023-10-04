@@ -1,7 +1,6 @@
 //import { create } from "";
 const apiURL = import.meta.env.VITE_INCODE_API_URL as string;
 const clientId = import.meta.env.VITE_INCODE_CLIENT_ID as string;
-//const apiKey = import.meta.env.VITE_INCODE_CLIENT_ID as string;
 
 // const incode = create({
 //   clientId: clientId,
@@ -9,7 +8,6 @@ const clientId = import.meta.env.VITE_INCODE_CLIENT_ID as string;
 //   theme: {},
 // });
 
-// export default incode;
 
 const incodeConfig = {
   apiURL,

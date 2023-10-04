@@ -4,12 +4,13 @@ import arrowDown from "./../assets/arrow-down.svg";
 import icons from "./../assets/icons.svg";
 import threeDots from "./../assets/three-dots.svg";
 
+import incode from '../incode';
+
 type SessionType ={
   token: string;
 };
 
 const FrontId = function({
-  incode,
   session,
   onSuccess,
   onError
@@ -33,12 +34,11 @@ const FrontId = function({
     });
     
     isMounted.current = true;
-  }, [incode, session, onSuccess, onError]);
+  }, [session, onSuccess, onError]);
   
   return <div ref={containerRef}></div>;
 }
 type FrontIdPropTypes = {
-  incode: unknown;
   session: SessionType;
   onSuccess: () => void;
   onError: (e: {type: string}) => void;

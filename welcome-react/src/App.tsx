@@ -61,7 +61,7 @@ function App() {
     <div className="App">
       <Steps currentStep={step}>
         <FrontId incode={incode} session={session} onError={handleErrorEvent} onSuccess={goNext}/>
-        {/* <BackId incode={incode} session={session}  onError={handleError} onSuccess={goNext}/>
+        <BackId incode={incode} session={session}  onError={handleError} onSuccess={goNext}/>
         <ProcessId session={session} onSuccess={goNext}/>
         <Selfie
           session={session}
@@ -84,7 +84,7 @@ function App() {
           numberOfTries={3}
           onSuccess={goNext}
           onError={handleError}
-        /> */}
+        />
         <div>
           <h1
             style={{
