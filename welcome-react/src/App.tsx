@@ -25,9 +25,9 @@ function App() {
       .createSession("ALL",undefined, {
         configurationId: flowId || undefined,
       })
-      .then(async (session) => {
+      .then(async (session: SessionType) => {
         await incode.warmup();
-        setSession(session as SessionType);
+        setSession(session);
         console.log(session);
       }); 
   }, [queryParams]);

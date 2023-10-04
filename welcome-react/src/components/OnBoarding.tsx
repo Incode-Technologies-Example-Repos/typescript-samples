@@ -40,7 +40,7 @@ const FrontId = function({
 type FrontIdPropTypes = {
   session: SessionType;
   onSuccess: () => void;
-  onError: () => void;
+  onError: (e: {type: string}) => void;
 }
 
 function BackId({ session, onSuccess, onError }: BackIdPropTypes) {
