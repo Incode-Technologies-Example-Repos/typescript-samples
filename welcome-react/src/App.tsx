@@ -16,9 +16,11 @@ function App() {
   const [userExists, setUserExists] = useState(false);
   
   const queryParams = useQuery();
+  
   function goNext() {
     setStep(step + 1);
   }
+
   useEffect(() => {
     const flowId = queryParams.get("flowId");
     void incode
@@ -29,7 +31,7 @@ function App() {
         await incode.warmup();
         setSession(session);
         console.log(session);
-      }); 
+      });
   }, [queryParams]);
   
   useEffect(() => {
@@ -50,7 +52,6 @@ function App() {
     setError(true);
   }
   
-  
   if (!session) return "loading";
   if (resetPermissions) {
     return <ResetPermissions onTryAgain={() => setResetPermissions(false)} />;
@@ -59,8 +60,8 @@ function App() {
   return (
     <div className="App">
       <Steps currentStep={step}>
-        <FrontId session={session} onError={handleErrorEvent} onSuccess={goNext}/>
-        <BackId session={session}  onError={handleError} onSuccess={goNext}/>
+        <FrontId incode={incode} session={session} onError={handleErrorEvent} onSuccess={goNext}/>
+        {/* <BackId incode={incode} session={session}  onError={handleError} onSuccess={goNext}/>
         <ProcessId session={session} onSuccess={goNext}/>
         <Selfie
           session={session}
@@ -83,7 +84,7 @@ function App() {
           numberOfTries={3}
           onSuccess={goNext}
           onError={handleError}
-        />
+        /> */}
         <div>
           <h1
             style={{

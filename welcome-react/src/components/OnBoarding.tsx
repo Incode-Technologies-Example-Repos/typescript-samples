@@ -4,13 +4,12 @@ import arrowDown from "./../assets/arrow-down.svg";
 import icons from "./../assets/icons.svg";
 import threeDots from "./../assets/three-dots.svg";
 
-import incode from '../incode';
-
 type SessionType ={
   token: string;
 };
 
 const FrontId = function({
+  incode,
   session,
   onSuccess,
   onError
@@ -22,6 +21,7 @@ const FrontId = function({
     if (isMounted.current) {
       return;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     incode.renderCamera("front", containerRef.current, {
       onSuccess,
       onError,
@@ -33,11 +33,12 @@ const FrontId = function({
     });
     
     isMounted.current = true;
-  }, [session, onSuccess, onError]);
+  }, [incode, session, onSuccess, onError]);
   
   return <div ref={containerRef}></div>;
 }
 type FrontIdPropTypes = {
+  incode: unknown;
   session: SessionType;
   onSuccess: () => void;
   onError: (e: {type: string}) => void;
