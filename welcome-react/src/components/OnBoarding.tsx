@@ -22,16 +22,26 @@ const FrontId = function({
     if (isMounted.current) {
       return;
     }
-    incode.renderCamera("front", containerRef.current, {
-      onSuccess,
-      onError,
-      token: session,
-      numberOfTries: -1,
-      showTutorial: true,
-      showCustomCameraPermissionScreen: true,
-      showDoublePermissionsRequest: true,
-    });
-    
+
+    const currentUrl = window.location.href;
+    if (incode.isDesktop()) {
+      incode.renderRedirectToMobile(containerRef.current, {
+        onSuccess,
+        session,
+        url: currentUrl
+      });
+    } else{
+      incode.renderCamera("front", containerRef.current, {
+        onSuccess,
+        onError,
+        token: session,
+        numberOfTries: -1,
+        showTutorial: true,
+        showCustomCameraPermissionScreen: true,
+        showDoublePermissionsRequest: true,
+      });
+    }
+  
     isMounted.current = true;
   }, [session, onSuccess, onError]);
   
