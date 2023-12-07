@@ -55,7 +55,7 @@ const FrontId = function({
       // @ts-ignore
       onError,
       token: session,
-      numberOfTries: 2,
+      numberOfTries: 3,
       showTutorial: false,
       showCustomCameraPermissionScreen: true,
       showDoublePermissionsRequest: true,
