@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { type SessionType, FrontId, BackId, ResetPermissions, ProcessId, Selfie, FaceMatch, RetrySteps } from "./components/OnBoarding";
-
 import usePermissions from "./hooks/usePermissions";
 import useQuery from "./hooks/useQuery";
 import incode from "./incode";
 import Steps from "./Steps";
+
+async function startOnboardingSession() {
+  const tokenServerURL = import.meta.env.VITE_TOKEN_SERVER_URL as string;
+  const response = await fetch(`${tokenServerURL}/start`);
+  const session: SessionType = await response.json() as SessionType;
+  return session;
+}
 
 function App() {
   const [session, setSession] = useState<SessionType|null>(null);
@@ -20,16 +26,11 @@ function App() {
     setStep(step + 1);
   }
   useEffect(() => {
-    const flowId = queryParams.get("flowId");
-    void incode
-      .createSession("ALL",undefined, {
-        configurationId: flowId || undefined,
-      })
-      .then(async (session: SessionType) => {
-        await incode.warmup();
-        setSession(session);
-        console.log(session);
-      }); 
+    startOnboardingSession().then(async (session: SessionType)=>{
+      await incode.warmup();
+      setSession(session);
+      console.log(session);
+    }).catch((e)=>console.log(e));  
   }, [queryParams]);
   
   useEffect(() => {

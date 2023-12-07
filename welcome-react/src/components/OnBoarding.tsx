@@ -24,27 +24,47 @@ const FrontId = function({
     }
 
     const currentUrl = window.location.href;
-    if (incode.isDesktop()) {
-      incode.renderRedirectToMobile(containerRef.current, {
-        onSuccess,
-        session,
-        url: currentUrl
-      });
-    } else{
-      incode.renderCamera("front", containerRef.current, {
-        onSuccess,
-        onError,
-        token: session,
-        numberOfTries: -1,
-        showTutorial: true,
-        showCustomCameraPermissionScreen: true,
-        showDoublePermissionsRequest: true,
-      });
-    }
+    // if (incode.isDesktop()) {
+
+
+    //   // console.log(currentUrl);
+    //   // // incode.renderRedirectToMobile(containerIncode, {
+    //   // //   session: incodeToken,
+    //   // //   onSuccess: (): void => resolve(true),
+    //   // //   skipDesktopRedirect: (): void => resolve(false),
+    //   // //   allowSkipRedirect: true,
+    //   // // });
+    //   // //void new Promise( (resolve, reject) => {
+    //   incode.renderRedirectToMobile(containerRef.current, {
+    //     onSuccess: (e) => console.log(e),
+    //     //skipDesktopRedirect: (): void => reject(true),
+    //     session: session,
+    //     //allowSkipRedirect: true,
+    //     url: currentUrl,
+    //   });
+        
+    //   // });
+    //   // // }).then((then)=>{console.log({then})})
+    //   // // onSuccess: () => {
+    //   // //   setIsFinished(true);
+    //   // // },
+
+    // } else{
+    incode.renderCamera("front", containerRef.current, {
+      onSuccess,
+      // @ts-ignore
+      onError,
+      token: session,
+      numberOfTries: 2,
+      showTutorial: false,
+      showCustomCameraPermissionScreen: true,
+      showDoublePermissionsRequest: true,
+    });
+    // }
   
     isMounted.current = true;
   }, [session, onSuccess, onError]);
-  
+
   return <div ref={containerRef}></div>;
 }
 type FrontIdPropTypes = {
@@ -65,7 +85,7 @@ function BackId({ session, onSuccess, onError }: BackIdPropTypes) {
       onSuccess,
       onError,
       token: session,
-      numberOfTries: -1,
+      numberOfTries: 3,
       showTutorial: true,
       showCustomCameraPermissionScreen: true,
       showDoublePermissionsRequest: true,
@@ -106,6 +126,7 @@ function Selfie({ session, onSuccess, onError }:SelfiePropTypes) {
       return;
     }
     incode.renderCamera("selfie", containerRef.current, {
+      //@ts-ignore
       onSuccess,
       onError,
       token: session,
@@ -127,12 +148,12 @@ type SelfiePropTypes = {
 
 function FaceMatch({ session, onSuccess, onError, liveness, userExists }: FaceMatchPropTypes) {
   const containerRef = useRef<HTMLDivElement>(null);
-  //const isMounted = useRef(false);
+  const isMounted = useRef(false);
   
   useEffect(() => {
-    // if (isMounted.current) {
-    //   return;
-    // }
+    if (isMounted.current) {
+      return;
+    }
     incode.renderFaceMatch(containerRef.current, {
       onSuccess,
       token: session,
@@ -140,7 +161,7 @@ function FaceMatch({ session, onSuccess, onError, liveness, userExists }: FaceMa
       existingUser: userExists,
       isSecondId: false
     });
-    //isMounted.current = true;
+    isMounted.current = true;
   }, [onSuccess, onError, session, liveness, userExists]);
 
   return <div ref={containerRef}></div>;
@@ -152,7 +173,6 @@ type FaceMatchPropTypes = {
   liveness: boolean;
   userExists: boolean;
 }
-
 
 // This only works for Android, you need to handle iOS
 const ResetPermissions = function ({
@@ -217,7 +237,9 @@ const RetrySteps = function ({ session, onSuccess, onError, numberOfTries }:Retr
       containerRef.current,
       { token: session, numberOfTries,showPassport:false, showTutorials:false},
       {
+        //@ts-ignore
         onSuccess,
+        //@ts-ignore
         onError,
       }
     );
