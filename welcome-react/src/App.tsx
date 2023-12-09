@@ -22,6 +22,7 @@ function App() {
   const [userExists, setUserExists] = useState(false);
   
   const queryParams = useQuery();
+  
   function goNext() {
     setStep(step + 1);
   }
