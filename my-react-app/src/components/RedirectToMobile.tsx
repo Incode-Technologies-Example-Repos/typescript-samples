@@ -1,9 +1,5 @@
-import {useEffect, useRef } from "react"
-import incode from "../incode"
-
-type SessionType ={
-  token: string
-};
+import {useEffect, useRef} from "react"
+import {incode, type SessionType} from "../incode"
 
 const RedirectToMobile = function({
   session,
@@ -17,23 +13,30 @@ const RedirectToMobile = function({
       return
     }
 
+    function captureAndContinue() {
+      //Register the device info
+      incode.sendFingerprint(session);
+      //Register the geolocation
+      incode.sendGeolocation(session);
+      onSkip()
+    }
+       
     const localServerUrl = import.meta.env.VITE_LOCAL_SERVER_URL as string;
     if ( incode.isDesktop() ) {
-      console.log(localServerUrl);
       incode.renderRedirectToMobile(containerRef.current, {
         session: session,
         onSuccess: (): void => console.log('success'),
-        skipDesktopRedirect: (): void => onSkip(),
+        skipDesktopRedirect: (): void => {captureAndContinue()},
         allowSkipRedirect: true,
         url:localServerUrl,
       });
     } else {
-        onSkip()
+      captureAndContinue();
     }
-  
+    
     isMounted.current = true
   }, [session, onSkip])
-
+  
   return <div ref={containerRef}></div>
 }
 

@@ -29,8 +29,8 @@ function App() {
   useEffect(() => {
     startOnboardingSession().then(async (session: SessionType)=>{
       await incode.warmup();
-      setSession(session);
       console.log(session);
+      setSession(session);
     }).catch((e)=>console.log(e));  
   }, [queryParams]);
   

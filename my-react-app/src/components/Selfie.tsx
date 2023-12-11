@@ -1,9 +1,5 @@
-import {useEffect, useRef } from "react"
-import incode from "../incode"
-
-type SessionType ={
-  token: string
-};
+import {useEffect, useRef} from "react"
+import {incode, type SessionType} from "../incode"
 
 function Selfie({ session, onSuccess, onError }:SelfiePropTypes) {
   const containerRef = useRef<HTMLDivElement>(null);

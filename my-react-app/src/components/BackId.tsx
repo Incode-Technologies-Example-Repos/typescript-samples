@@ -1,10 +1,6 @@
 import {useEffect, useRef } from "react"
-import incode from "../incode"
+import {incode, type SessionType} from "../incode"
 
-type SessionType ={
-  token: string
-};
-  
 const BackId = function({
   session,
   onSuccess,

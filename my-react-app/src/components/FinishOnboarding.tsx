@@ -1,9 +1,5 @@
 import {useEffect} from "react"
-import incode from "../incode"
-
-type SessionType ={
-  token: string
-};
+import {incode, type SessionType} from "../incode"
 
 function FinishOnboarding({
   session,

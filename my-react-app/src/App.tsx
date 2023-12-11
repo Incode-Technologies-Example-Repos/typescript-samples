@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Steps from "./components/Steps";
+import {type SessionType } from "./incode"
 import { RedirectToMobile } from './components/RedirectToMobile';
 import { FrontId } from './components/FrontId';
 import { BackId } from './components/BackId';
@@ -13,11 +14,11 @@ async function startOnboardingSession() {
   const tokenServerURL = import.meta.env.VITE_TOKEN_SERVER_URL as string;
   const response = await fetch(`${tokenServerURL}/start`);
   const session = await response.json();
-  return session;
+  return session as SessionType;
 }
 
 function App() {
-  const [session, setSession] = useState(null); // Stores the Session
+  const [session, setSession] = useState<null|SessionType>(null); // Stores the Session
   
   const [step, setStep] = useState(0); // Store the current step
   //Advance to the next Step
@@ -41,7 +42,7 @@ function App() {
     if (isLoaded.current) return;
     
     //Fetch the session and save it on the session variable
-    startOnboardingSession().then(async (session) => {
+    startOnboardingSession().then(async (session:SessionType) => {
       setSession(session);
     }).catch(
       (e)=>console.log(e)
