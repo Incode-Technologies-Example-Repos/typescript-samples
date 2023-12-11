@@ -11,12 +11,13 @@ function ProcessFace({
   onError
 }:ProccessFacePropTypes) {
   useEffect(() => {
-    void incode.processFace({ token: session.token}).then(() => {
+    void incode.processFace(
+      {token: session.token}
+    ).then(() => {
       onSuccess();
     }).catch((error) => {
       onError({type: error});
     });
-    
   }, [session, onSuccess, onError]);
   
   return <p>Processing...</p>;

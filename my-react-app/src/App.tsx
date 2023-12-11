@@ -61,7 +61,7 @@ function App() {
       <Selfie session={session} onError={handleError} onSuccess={goNext}/>
       <ProcessFace  session={session} onError={handleError} onSuccess={goNext} />
       <FinishOnboarding session={session} onError={handleError} onSuccess={goNext} />
-      <h1>Finish</h1>
+      <h1>Done!</h1>
     </Steps>
   )
 }

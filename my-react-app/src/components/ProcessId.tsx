@@ -11,12 +11,13 @@ function ProcessId({
   onError
 }:ProccessIdPropTypes) {
   useEffect(() => {
-    void incode.processId({ token: session.token}).then(() => {
+    void incode.processId(
+      {token: session.token}
+    ).then(() => {
       onSuccess();
     }).catch((error) => {
       onError({type: error});
     });
-    
   }, [session, onSuccess, onError]);
   
   return <p>Processing...</p>;
