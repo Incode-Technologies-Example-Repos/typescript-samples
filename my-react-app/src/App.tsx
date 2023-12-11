@@ -5,6 +5,8 @@ import { FrontId } from './components/FrontId';
 import { BackId } from './components/BackId';
 import { ProcessId } from './components/ProcessId';
 import { Selfie } from './components/Selfie';
+import { ProcessFace } from './components/ProcessFace';
+import { FinishOnboarding } from './components/FinishOnboarding';
 
 //Function to fetch the onboarding session
 async function startOnboardingSession() {
@@ -55,8 +57,10 @@ function App() {
       <RedirectToMobile session={session} onSkip={goNext}/>
       <FrontId session={session} onError={handleError} onSuccess={goNext}/>
       <BackId session={session} onError={handleError} onSuccess={goNext}/>
-      <ProcessId session={session} onSuccess={goNext}/>
+      <ProcessId  session={session} onError={handleError} onSuccess={goNext} />
       <Selfie session={session} onError={handleError} onSuccess={goNext}/>
+      <ProcessFace  session={session} onError={handleError} onSuccess={goNext} />
+      <FinishOnboarding session={session} onError={handleError} onSuccess={goNext} />
       <h1>Finish</h1>
     </Steps>
   )

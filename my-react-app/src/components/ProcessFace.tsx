@@ -5,13 +5,13 @@ type SessionType ={
   token: string
 };
 
-function ProcessId({
+function ProcessFace({
   session,
   onSuccess,
   onError
-}:ProccessIdPropTypes) {
+}:ProccessFacePropTypes) {
   useEffect(() => {
-    void incode.processId({ token: session.token}).then(() => {
+    void incode.processFace({ token: session.token}).then(() => {
       onSuccess();
     }).catch((error) => {
       onError({type: error});
@@ -22,10 +22,10 @@ function ProcessId({
   return <p>Processing...</p>;
 }
 
-type ProccessIdPropTypes = {
+type ProccessFacePropTypes = {
   session: SessionType;
   onSuccess: () => void;
   onError: (e: {type: string}) => void;
 }
 
-export {ProcessId}
+export {ProcessFace}
