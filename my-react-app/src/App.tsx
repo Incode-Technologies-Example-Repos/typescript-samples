@@ -1,7 +1,10 @@
-import { useState, useEffect, useRef} from 'react'
-import Steps from "./Steps";
+import { useState, useEffect, useRef } from 'react'
+import Steps from "./components/Steps";
 import { RedirectToMobile } from './components/RedirectToMobile';
-
+import { FrontId } from './components/FrontId';
+import { BackId } from './components/BackId';
+import { ProcessId } from './components/ProcessId';
+import { Selfie } from './components/Selfie';
 
 //Function to fetch the onboarding session
 async function startOnboardingSession() {
@@ -13,14 +16,22 @@ async function startOnboardingSession() {
 
 function App() {
   const [session, setSession] = useState(null); // Stores the Session
+  
   const [step, setStep] = useState(0); // Store the current step
-  // Store data that will not trigger re-renders unless specifically told so
-  const isLoaded = useRef(false); 
-
   //Advance to the next Step
   function goNext() {
     setStep(step + 1);
   }
+  
+  // Error Handling
+  const [error, setError] = useState("");
+  //Handling Error
+  function handleError(e: { type: string; }) {
+    setError(e.type);
+  }
+  
+  // Store data that will not trigger re-renders unless specifically told so
+  const isLoaded = useRef(false); 
 
   // Run this after the initial loading
   useEffect(() => {
@@ -37,18 +48,17 @@ function App() {
     isLoaded.current = true;
   }, []);
 
+  if (!session) return (<p>Loading Session...</p>);
+  if (error) return (<p>Error: {error}!</p>);
   return (
-    <>
-      {session
-        ? (
-          <Steps currentStep={step}>
-            <RedirectToMobile session={session} onSkip={goNext}/>
-            <h1>Finish</h1>
-        </Steps>
-        )
-        : <p>Loading Session...</p>
-      }
-    </>
+    <Steps currentStep={step}>
+      <RedirectToMobile session={session} onSkip={goNext}/>
+      <FrontId session={session} onError={handleError} onSuccess={goNext}/>
+      <BackId session={session} onError={handleError} onSuccess={goNext}/>
+      <ProcessId session={session} onSuccess={goNext}/>
+      <Selfie session={session} onError={handleError} onSuccess={goNext}/>
+      <h1>Finish</h1>
+    </Steps>
   )
 }
 

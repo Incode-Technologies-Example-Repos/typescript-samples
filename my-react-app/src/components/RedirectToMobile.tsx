@@ -42,4 +42,4 @@ type RedirectToMobileTypes = {
   onSkip: () => void;
 }
 
-export {RedirectToMobile, type SessionType}
+export {RedirectToMobile}
