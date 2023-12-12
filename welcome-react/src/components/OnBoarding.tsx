@@ -24,100 +24,38 @@ const FrontId = function({
     }
 
     const currentUrl = window.location.href;
-    if (incode.isDesktop()) {
-      // console.log(currentUrl);
-      // // incode.renderRedirectToMobile(containerIncode, {
-      // //   session: incodeToken,
-      // //   onSuccess: (): void => resolve(true),
-      // //   skipDesktopRedirect: (): void => resolve(false),
-      // //   allowSkipRedirect: true,
-      // // });
-      // //void new Promise( (resolve, reject) => {
-      incode.renderRedirectToMobile(containerRef.current, {
-        onSuccess: (e) => console.log(e),
-        //skipDesktopRedirect: (): void => reject(true),
-        session: session,
-        //allowSkipRedirect: true,
-        url: currentUrl,
-      });
-        
-      // });
-      // // }).then((then)=>{console.log({then})})
-      // // onSuccess: () => {
-      // //   setIsFinished(true);
-      // // },
+    // if (incode.isDesktop()) {
 
-    } else{
+
+    //   // console.log(currentUrl);
+    //   // // incode.renderRedirectToMobile(containerIncode, {
+    //   // //   session: incodeToken,
+    //   // //   onSuccess: (): void => resolve(true),
+    //   // //   skipDesktopRedirect: (): void => resolve(false),
+    //   // //   allowSkipRedirect: true,
+    //   // // });
+    //   // //void new Promise( (resolve, reject) => {
+    //   incode.renderRedirectToMobile(containerRef.current, {
+    //     onSuccess: (e) => console.log(e),
+    //     //skipDesktopRedirect: (): void => reject(true),
+    //     session: session,
+    //     //allowSkipRedirect: true,
+    //     url: currentUrl,
+    //   });
+        
+    //   // });
+    //   // // }).then((then)=>{console.log({then})})
+    //   // // onSuccess: () => {
+    //   // //   setIsFinished(true);
+    //   // // },
+
+    // } else{
     incode.renderCamera("front", containerRef.current, {
       onSuccess,
       // @ts-ignore
       onError,
       token: session,
-      numberOfTries: 3,
-      showTutorial: false,
-      showCustomCameraPermissionScreen: true,
-      showDoublePermissionsRequest: true,
-    });
-    // }
-  
-    isMounted.current = true;
-  }, [session, onSuccess, onError]);
-
-  return <div ref={containerRef}></div>;
-}
-type FrontIdPropTypes = {
-  session: SessionType;
-  onSuccess: () => void;
-  onError: (e: {type: string}) => void;
-}
-
-
-
-
-const FrontId = function({
-  session,
-  onSuccess,
-  onError
-}: FrontIdPropTypes) {
-  const containerRef= useRef<HTMLDivElement>(null);
-  const isMounted = useRef(false);
-  
-  useEffect(() => {
-    if (isMounted.current) {
-      return;
-    }
-
-    const currentUrl = window.location.href;
-    if (incode.isDesktop()) {
-      // console.log(currentUrl);
-      // // incode.renderRedirectToMobile(containerIncode, {
-      // //   session: incodeToken,
-      // //   onSuccess: (): void => resolve(true),
-      // //   skipDesktopRedirect: (): void => resolve(false),
-      // //   allowSkipRedirect: true,
-      // // });
-      // //void new Promise( (resolve, reject) => {
-      incode.renderRedirectToMobile(containerRef.current, {
-        onSuccess: (e) => console.log(e),
-        //skipDesktopRedirect: (): void => reject(true),
-        session: session,
-        //allowSkipRedirect: true,
-        url: currentUrl,
-      });
-        
-      // });
-      // // }).then((then)=>{console.log({then})})
-      // // onSuccess: () => {
-      // //   setIsFinished(true);
-      // // },
-
-    } else{
-    incode.renderCamera("front", containerRef.current, {
-      onSuccess,
-      // @ts-ignore
-      onError,
-      token: session,
-      numberOfTries: 3,
+      numberOfTries: 2,
       showTutorial: false,
       showCustomCameraPermissionScreen: true,
       showDoublePermissionsRequest: true,
