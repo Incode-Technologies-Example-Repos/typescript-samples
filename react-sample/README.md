@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+# React + Typescript WebSDK Sample
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This Sample Repository follows the recommended core flow for and Incode's onboarding, you can find a step by step on how this project was created in [React Integration](https://developer.incode.com/docs/npm-integration-react).
 
-Currently, two official plugins are available:
+We used the default Vite 5 Typescript React Template with some key changes:
+* Added https via the `vite-plugin-mkcert`.
+* Serve the app in the local network interface instead of just localhost (added --host to the `npm run dev` script).
+* Used .env file to configure the project.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Install
+To install execute the following command in the terminal:
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Setup
+Copy the `sample.env` file into `.env` and fill the variables:
+
+```env
+VITE_INCODE_API_URL=https://demo-api.incodesmile.com
+VITE_INCODE_CLIENT_ID=<your-client-id>
+VITE_TOKEN_SERVER_URL=<the-url-of-the-backend-server-user-to-get-the-session-object>
+VITE_LOCAL_SERVER_URL=https://your-ip:port/
+```
+
+* The API URL for you is probably going to be the demo one, remember to change it when moving to production.
+
+* Your clientID comes from the dashboard
+
+* You must create a Token Server and put that url here, luckily for you we actually made several of them in the most popular backends languages: [Quick Start Servers](https://developer.incode.com/docs/quick-start-servers), you can be up and running in less than 15 minutes.
+
+* You will need to visit this page on your mobile phone, that what the local server url is for, to put in your local IP and the port where vite exposes your project when you run `npm run dev`.
+
+## Run
+To run the project execute the following command in the terminal:
+```bash
+npm run dev
+```
+
+# Steps:
+This sample implements the following steps.
+* RedirectToMobile: Provides a convenient way to move the users to complete onboarding in a mobile phone, it has a QR code and a SMS sending feature.
+* Geolocation and Device Fingerprinting: Get valuable information about the user that later can be used to apply business rules and fraud prevention.
+* FrontId: Captures the front of the ID 
+* BackId: Captures the back of the ID 
+* ProcessId: Process the information contained in the ID
+* Selfie: Takes a picture of the user.
+* ProcessFace: Matchs the face of the user with the face in the ID.
+* FinishOnboarding: Marks the session as complete and triggers all the postprocessing.
