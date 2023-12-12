@@ -23,33 +23,6 @@ const FrontId = function({
       return;
     }
 
-    const currentUrl = window.location.href;
-    // if (incode.isDesktop()) {
-
-
-    //   // console.log(currentUrl);
-    //   // // incode.renderRedirectToMobile(containerIncode, {
-    //   // //   session: incodeToken,
-    //   // //   onSuccess: (): void => resolve(true),
-    //   // //   skipDesktopRedirect: (): void => resolve(false),
-    //   // //   allowSkipRedirect: true,
-    //   // // });
-    //   // //void new Promise( (resolve, reject) => {
-    //   incode.renderRedirectToMobile(containerRef.current, {
-    //     onSuccess: (e) => console.log(e),
-    //     //skipDesktopRedirect: (): void => reject(true),
-    //     session: session,
-    //     //allowSkipRedirect: true,
-    //     url: currentUrl,
-    //   });
-        
-    //   // });
-    //   // // }).then((then)=>{console.log({then})})
-    //   // // onSuccess: () => {
-    //   // //   setIsFinished(true);
-    //   // // },
-
-    // } else{
     incode.renderCamera("front", containerRef.current, {
       onSuccess,
       // @ts-ignore
@@ -60,7 +33,6 @@ const FrontId = function({
       showCustomCameraPermissionScreen: true,
       showDoublePermissionsRequest: true,
     });
-    // }
   
     isMounted.current = true;
   }, [session, onSuccess, onError]);

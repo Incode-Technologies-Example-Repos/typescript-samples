@@ -22,14 +22,15 @@ function App() {
   const [userExists, setUserExists] = useState(false);
   
   const queryParams = useQuery();
+  
   function goNext() {
     setStep(step + 1);
   }
   useEffect(() => {
     startOnboardingSession().then(async (session: SessionType)=>{
       await incode.warmup();
-      setSession(session);
       console.log(session);
+      setSession(session);
     }).catch((e)=>console.log(e));  
   }, [queryParams]);
   
