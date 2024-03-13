@@ -14,10 +14,6 @@ const FrontId = function({
       return;
     }
 
-    // Optional but valuable for fraud prevention, hurts conversion
-    // incode.sendFingerprint(session);
-    // incode.sendGeolocation(session);
-    
     incode.renderCamera("front", containerRef.current, {
       onSuccess,
       onError: ()=> onError({type: "Couldn't Capture FrontId"}),

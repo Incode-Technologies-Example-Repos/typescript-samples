@@ -53,6 +53,7 @@ npm run dev
 # Steps:
 This sample implements the following steps.
 * RedirectToMobile: Provides a convenient way to move the users to complete onboarding in a mobile phone, it has a QR code and a SMS sending feature.
+* UserConsent: Before we start capturing any information we need the users consent
 * Geolocation and Device Fingerprinting: Get valuable information about the user that later can be used to apply business rules and fraud prevention.
 * FrontId: Captures the front of the ID 
 * BackId: Captures the back of the ID 
@@ -60,3 +61,58 @@ This sample implements the following steps.
 * Selfie: Takes a picture of the user.
 * ProcessFace: Matchs the face of the user with the face in the ID.
 * FinishOnboarding: Marks the session as complete and triggers all the postprocessing.
+
+The code is made with renderRedirectToMobile as first step, if it detects that the user is in desktop it will
+present renderRedirectToMobile with an `URL` that points to this same file using the `VITE_LOCAL_SERVER_URL`
+enviroment variable + a generated `uuid` that we received from the call to `/start`.
+
+The `renderRedirectToMobile` has a behaviour where it automatically polls for the status of the session, and
+when it detects that the session has finished, it executes the `onSuccess` method to continue.
+
+The URL when opened in mobile will read the `uuid` from the query params, and send it to `/start` to continue
+the session instead of creating a new one.
+
+The `uuid` links both desktop and mobile that are running in parallel to give the best possible experience to
+the user.
+
+This diagram explains it in detail:
+
+```mermaid
+sequenceDiagram
+    participant f as Frontend
+    participant b as Backend
+    participant a as API
+    
+    alt uuid exists in query params
+        f -->> b: /start
+        b -->> a: /omni/start
+        a -->> b: {token, interviewId}
+        note over b: Generate uuid
+        note over b: Save Session<br>{token, interviewId, uuid}
+        b-->> f: {token, interviewId, uuid}
+    else completely new session
+        f -->> b: /start?uuid=<uuid>
+        note over b: Retrieve stored Session<br>{token, interviewId, uuid}
+        b-->> f: {token, interviewId, uuid}
+    end
+
+    alt Desktop
+        note over f: RedirectToMobile
+        
+        loop while onboarding_status!=='ONBOARDING_FINISHED'
+        note over f, a: This loop happens automatically<br> inside the method
+            f -->> a: /omni/onboarding-status {token}
+            a-->> f: {onboarding_status}
+        end
+    else Mobile
+        note over f: UserConsent
+        note over f: Geolocation and Device Fingerprinting
+        note over f: FrontId
+        note over f: BackId
+        note over f: ProcessId
+        note over f: Selfie
+        note over f: ProcessFace
+        note over f: FinishOnboarding
+    end
+    note over f: Finish screen
+```
