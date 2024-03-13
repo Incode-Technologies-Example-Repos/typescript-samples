@@ -13,6 +13,10 @@ const FrontId = function({
     if (isMounted.current) {
       return;
     }
+
+    // Optional but valuable for fraud prevention, hurts conversion
+    // incode.sendFingerprint(session);
+    // incode.sendGeolocation(session);
     
     incode.renderCamera("front", containerRef.current, {
       onSuccess,

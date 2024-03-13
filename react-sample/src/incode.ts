@@ -4,7 +4,8 @@ const clientId = import.meta.env.VITE_INCODE_CLIENT_ID as string;
 
 type SessionType ={
   token: string,
-  interviewId: string
+  interviewId: string,
+  uuid?: string
 };
 
 const incode = create({

@@ -4,6 +4,7 @@ import {incode, type SessionType} from "../incode"
 const RedirectToMobile = function({
   session,
   onSkip,
+  onFinish,
 }: RedirectToMobileTypes) {
   const containerRef= useRef<HTMLDivElement>(null)
   const isMounted = useRef(false)
@@ -13,29 +14,22 @@ const RedirectToMobile = function({
       return
     }
 
-    function captureAndContinue() {
-      //Register the device info
-      incode.sendFingerprint(session);
-      //Register the geolocation
-      incode.sendGeolocation(session);
-      onSkip()
-    }
-       
     const localServerUrl = import.meta.env.VITE_LOCAL_SERVER_URL as string;
+
     if ( incode.isDesktop() ) {
       incode.renderRedirectToMobile(containerRef.current, {
         session: session,
-        onSuccess: (): void => console.log('success'),
-        skipDesktopRedirect: (): void => {captureAndContinue()},
+        onSuccess: onFinish,
+        skipDesktopRedirect: (): void => {onSkip()},
         allowSkipRedirect: true,
-        url:localServerUrl,
+        url:`${localServerUrl}?uuid=${session.uuid}`,
       });
     } else {
-      captureAndContinue();
+      onSkip();
     }
     
     isMounted.current = true
-  }, [session, onSkip])
+  }, [session, onSkip, onFinish])
   
   return <div ref={containerRef}></div>
 }
@@ -43,6 +37,7 @@ const RedirectToMobile = function({
 type RedirectToMobileTypes = {
   session: SessionType;
   onSkip: () => void;
+  onFinish: () => void;
 }
 
 export {RedirectToMobile}

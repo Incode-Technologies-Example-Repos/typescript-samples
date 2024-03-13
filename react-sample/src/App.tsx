@@ -12,18 +12,33 @@ import { FinishOnboarding } from './components/FinishOnboarding';
 //Function to fetch the onboarding session
 async function startOnboardingSession() {
   const tokenServerURL = import.meta.env.VITE_TOKEN_SERVER_URL as string;
-  const response = await fetch(`${tokenServerURL}/start`);
-  const session = await response.json();
-  return session as SessionType;
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const uuid = urlParams.get('uuid');
+  
+  let sessionStartUrl = `${tokenServerURL}/start`
+  if (uuid) sessionStartUrl +=`?uuid=${uuid}`;
+
+  const response = await fetch(sessionStartUrl);
+  if (!response.ok) {
+    const sessionData = await response.json();
+    throw new Error(sessionData.error);
+  }
+
+  return await response.json() as SessionType;
 }
 
 function App() {
   const [session, setSession] = useState<null|SessionType>(null); // Stores the Session
   
   const [step, setStep] = useState(0); // Store the current step
+  
   //Advance to the next Step
   function goNext() {
     setStep(step + 1);
+  }
+  function goLast() {
+    setStep(7)
   }
   
   // Error Handling
@@ -55,7 +70,7 @@ function App() {
   if (error) return (<p>Error: {error}!</p>);
   return (
     <Steps currentStep={step}>
-      <RedirectToMobile session={session} onSkip={goNext}/>
+      <RedirectToMobile session={session} onSkip={goNext} onFinish={goLast}/>
       <FrontId session={session} onError={handleError} onSuccess={goNext}/>
       <BackId session={session} onError={handleError} onSuccess={goNext}/>
       <ProcessId  session={session} onError={handleError} onSuccess={goNext} />
