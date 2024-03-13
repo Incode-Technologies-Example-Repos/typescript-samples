@@ -8,6 +8,8 @@ import { ProcessId } from './components/ProcessId';
 import { Selfie } from './components/Selfie';
 import { ProcessFace } from './components/ProcessFace';
 import { FinishOnboarding } from './components/FinishOnboarding';
+import { UserConsent } from './components/UserConsent';
+
 
 //Function to fetch the onboarding session
 async function startOnboardingSession() {
@@ -38,7 +40,7 @@ function App() {
     setStep(step + 1);
   }
   function goLast() {
-    setStep(7)
+    setStep(8);
   }
   
   // Error Handling
@@ -71,6 +73,7 @@ function App() {
   return (
     <Steps currentStep={step}>
       <RedirectToMobile session={session} onSkip={goNext} onFinish={goLast}/>
+      <UserConsent session={session} onSuccess={goNext}/>
       <FrontId session={session} onError={handleError} onSuccess={goNext}/>
       <BackId session={session} onError={handleError} onSuccess={goNext}/>
       <ProcessId  session={session} onError={handleError} onSuccess={goNext} />
