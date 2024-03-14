@@ -30,19 +30,14 @@ npm install
 Copy the `sample.env` file into `.env` and fill the variables:
 
 ```env
-VITE_INCODE_API_URL=https://demo-api.incodesmile.com
-VITE_INCODE_CLIENT_ID=<your-client-id>
+VITE_INCODE_API_URL=https://demo-api.incodesmile.com/0
 VITE_TOKEN_SERVER_URL=/api
 VITE_LOCAL_SERVER_URL=https://your-ip:port/
 ```
 
 * The API URL for you is probably going to be the demo one, remember to change it when moving to production.
 
-* Your clientID comes from the dashboard
-
 * You will need to visit this page on your mobile phone, that what the local server url is for, to put in your local IP and the port where vite exposes your project when you run `npm run dev`.
-
-
 
 ## Run
 To run the project execute the following command in the terminal:

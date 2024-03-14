@@ -21,7 +21,8 @@ const RedirectToMobile = function({
         session: session,
         onSuccess: onFinish,
         skipDesktopRedirect: (): void => {onSkip()},
-        allowSkipRedirect: true,
+        allowSkipRedirect: false,
+        showSms: false,
         url:`${localServerUrl}?uuid=${session.uuid}`,
       });
     } else {
