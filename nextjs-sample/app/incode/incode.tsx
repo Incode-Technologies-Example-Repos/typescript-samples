@@ -14,7 +14,6 @@ function UserConsent({ session, baseUrl }:UserConsentPropTypes) {
           incode = window.OnBoarding.create({
               apiURL: baseUrl
           });
-          debugger;
         }
         
         if (incode && isMounted.current) {
@@ -27,8 +26,6 @@ function UserConsent({ session, baseUrl }:UserConsentPropTypes) {
             // Optional but valuable for fraud prevention, hurts conversion
             // incode.sendFingerprint(session);
             // incode.sendGeolocation(session);
-            console.log(incode.sendGeolocation(session));
-            console.log(incode.isDesktop());
             captureIdFrontSide();
         }
 
@@ -88,7 +85,6 @@ function UserConsent({ session, baseUrl }:UserConsentPropTypes) {
           onSuccess: () =>{ captureAndContinue() },
           session: session,
         });
-        debugger;
 
         isMounted.current = true;
 
