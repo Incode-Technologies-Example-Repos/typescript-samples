@@ -11,8 +11,7 @@ function UserConsent({ session, baseUrl }:UserConsentPropTypes) {
     useEffect(() => {
         if (window && window.OnBoarding) {
            // Initialize the SDK
-          incode = window.OnBoarding;
-          incode.create({
+          incode = window.OnBoarding.create({
               apiURL: baseUrl
           });
         }
@@ -27,7 +26,6 @@ function UserConsent({ session, baseUrl }:UserConsentPropTypes) {
             // Optional but valuable for fraud prevention, hurts conversion
             // incode.sendFingerprint(session);
             // incode.sendGeolocation(session);
-            
             captureIdFrontSide();
         }
 
@@ -82,13 +80,12 @@ function UserConsent({ session, baseUrl }:UserConsentPropTypes) {
               console.log(error);
             });
         }
-
         // Render the initial module for your flow
         incode.renderUserConsent(containerRef.current, {
           onSuccess: () =>{ captureAndContinue() },
           session: session,
         });
-        
+
         isMounted.current = true;
 
     }, [session]);
