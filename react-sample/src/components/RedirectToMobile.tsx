@@ -23,7 +23,7 @@ const RedirectToMobile = function({
         skipDesktopRedirect: (): void => {onSkip()},
         allowSkipRedirect: false,
         showSms: false,
-        url:`${localServerUrl}?uuid=${session.uuid}`,
+        url:`${localServerUrl}?uniqueId=${session.uniqueId}`,
       });
     } else {
       onSkip();
