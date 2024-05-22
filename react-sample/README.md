@@ -10,9 +10,8 @@ We used the default Vite 5 Typescript React Template with some key changes:
 
 # Backend Server
 A backend server that will generate the url is needed for this sample,
-luckily for you we already have sample server for PHP, NodeJS, Python,
-PHP and Java and .NET, please reffer to our documentation on subject:
-[Quick Start Sample Server](https://developer.incode.com/docs/quick-start-servers)
+luckily for you we already have sample server for NodeJS, please reffer
+to our documentation on subject: [Sample Backend Server](https://developer.incode.com/docs/code-samples-for-web-integrations#backend-sample-server)
 
 In order to simplfy development, this repo is configured to reverse
 proxy a local backend server (`http://localhost:3000`) in the `/api`
@@ -59,15 +58,15 @@ This sample implements the following steps.
 
 The code is made with renderRedirectToMobile as first step, if it detects that the user is in desktop it will
 present renderRedirectToMobile with an `URL` that points to this same file using the `VITE_LOCAL_SERVER_URL`
-enviroment variable + a generated `uuid` that we received from the call to `/start`.
+enviroment variable + a generated `uniqueId` that we received from the call to `/start`.
 
 The `renderRedirectToMobile` has a behaviour where it automatically polls for the status of the session, and
 when it detects that the session has finished, it executes the `onSuccess` method to continue.
 
-The URL when opened in mobile will read the `uuid` from the query params, and send it to `/start` to continue
+The URL when opened in mobile will read the `uniqueId` from the query params, and send it to `/start` to continue
 the session instead of creating a new one.
 
-The `uuid` links both desktop and mobile that are running in parallel to give the best possible experience to
+The `uniqueId` links both desktop and mobile that are running in parallel to give the best possible experience to
 the user.
 
 This diagram explains it in detail:
@@ -82,13 +81,13 @@ sequenceDiagram
         f -->> b: /start
         b -->> a: /omni/start
         a -->> b: {token, interviewId}
-        note over b: Generate uuid
-        note over b: Save Session<br>{token, interviewId, uuid}
-        b-->> f: {token, interviewId, uuid}
-    else uuid comes in query params
-        f -->> b: /start?uuid=<uuid>
-        note over b: Retrieve stored Session<br>{token, interviewId, uuid}
-        b-->> f: {token, interviewId, uuid}
+        note over b: Generate uniqueId
+        note over b: Save Session<br>{token, interviewId, uniqueId}
+        b-->> f: {token, uniqueId}
+    else uniqueId comes in query params
+        f -->> b: /start?uniqueId=<uniqueId>
+        note over b: Retrieve stored Session<br>{token, interviewId, uniqueId}
+        b-->> f: {token, uniqueId}
     end
 
     alt Desktop

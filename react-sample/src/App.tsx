@@ -16,10 +16,10 @@ async function startOnboardingSession() {
   const tokenServerURL = import.meta.env.VITE_TOKEN_SERVER_URL as string;
   
   const urlParams = new URLSearchParams(window.location.search);
-  const uuid = urlParams.get('uuid');
+  const uniqueId = urlParams.get('uniqueId');
   
   let sessionStartUrl = `${tokenServerURL}/start`
-  if (uuid) sessionStartUrl +=`?uuid=${uuid}`;
+  if (uniqueId) sessionStartUrl +=`?uniqueId=${uniqueId}`;
 
   const response = await fetch(sessionStartUrl);
   if (!response.ok) {
