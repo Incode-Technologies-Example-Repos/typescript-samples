@@ -5,7 +5,8 @@ This is an example showing how to run Incode's inside the Angular JS framework.
 
 ## Context
 
-There are probably numerous ways to integrate JS / TS libaries in the Angular Framework.  This samples shows one way of doing it to support Identity Verification.  
+There are numerous ways to integrate JS / TS libraries in the Angular Framework.  This samples shows how to integrate Incode's Web SDK with Angular JS to do Identity Verification.  This sample is optimized for Mobile Web Onboarding.
+
 
 The sample illustrates the following techniques. 
 
