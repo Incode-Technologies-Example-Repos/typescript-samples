@@ -1,11 +1,11 @@
 # Angular Web SDK Sample
 
-This is an example showing how to run Incode's inside the Angular JS framework. 
+This is an example showing how to run Incode's Web SDK inside the Angular JS framework. 
 
 
 ## Context
 
-There are probably numerous ways to integrate JS / TS libaries in the Angular Framework.  This samples shows one way of doing it to support Identity Verification.  
+There are numerous ways to integrate JS / TS libraries in the Angular Framework.  This samples shows how to integrate Incode's Web SDK with Angular JS to do Identity Verification.  This sample is optimized for Mobile Web Onboarding.
 
 The sample illustrates the following techniques. 
 
@@ -47,7 +47,7 @@ npm install
 npm run start
 ```
 
-After running the above the app will launch in the web browser.  After it has launched, run the below NGROK command to create a publically accessible HTTPS URL to use for testing.
+After running the above commands, the app will launch inside a web browser.  After it has launched, run the below NGROK command to create a publically accessible HTTPS URL to use for testing.
 
 ``` ngrok http 4200 ```
 
