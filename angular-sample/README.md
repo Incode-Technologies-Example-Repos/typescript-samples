@@ -21,7 +21,7 @@ The sample illustrates the following techniques.
 
 ## Prerequisites
 
-* Use Node.JS v22.11.1 (or risk it)
+* Use Node.JS v20.11.1 (or risk it)
 
 * This sample uses the popular [Angular JS Framework] (https://angularjs.org/)  with Incode 
 
